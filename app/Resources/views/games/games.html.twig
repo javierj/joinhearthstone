@@ -1,0 +1,16 @@
+{% extends "parent.html.twig" %}
+
+{% block title %}Games Schedule{% endblock %}
+
+{% block body %}
+       <H1> Games Schedule </H1>
+       <br/>
+       <table>
+        <tr> <td> Player </td> <td> Player </td> <td> Date </td> </tr>
+        {% for game in games %}
+            <tr>
+            <td> {{ game.player_a }} ({{ game.player_a_gameid }})</td> <td> {{ game.player_b_id }} ({{ game.player_b_gameid }})</td> <td> {{ game.date_to_play }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

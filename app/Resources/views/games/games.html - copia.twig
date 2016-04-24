@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Games Schedule</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <H1> Games Schedule </H1>
+        {% for game in games %}
+            {{ game.player_a }} vs. {{ game.player_b_id }} on {{ game.date_to_play }}
+            <br/>
+            <hr/>
+        {% endfor %}
+    </body>
+</html>

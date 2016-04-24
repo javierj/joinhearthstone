@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+       <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+         <!-- Include Bootstrap Css -->
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Include Bootstrap Min Css -->
+  <link rel="stylesheet" href="{{ asset('css/custom.css') }}" rel="stylesheet"/>
+
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+    </head>
+    <body>
+        
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Logo and responsive toggle -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <span class="glyphicon glyphicon-fire"><img src="{{ asset('imgs/mini_icon.png') }}"/></span> 
+                    
+                </a>
+            </div>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/">Principal</a>
+                    </li>
+                    <li>
+                        <a href="/player/seasonoverview">Clasificación</a>
+                    </li>
+                    <li>
+                        <a href="/player/new">Inscripciones</a>
+                    </li>
+                    <li>
+                        <a href="/player/matches">Calendario</a>
+                    </li>
+
+                    <li>
+                        <a href="/rules">Reglamento</a>
+                    </li>
+                    <li>
+                        <a href="/faqs">FAQs</a>
+                    </li>
+                    <li>
+                        <a href="/contact">Contacto</a>
+                    </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- end navigation -->
+
+    <div class="jumbotron feature">
+        <div class="container">
+            <h1><span class="glyphicon glyphicon-equalizer"><img src="{{ asset('imgs/mini_icon.png') }}"/></span> joinHearthstone</h1>
+            <p>La liga independiente de los jugadores de Hearthstone.</p>
+        </div>
+    </div> 
+
+
+    <!-- Content -->
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                {% block body %}{% endblock %}
+
+            </div>
+        </div>
+    </div>
+
+
+        
+
+    <footer>
+        <hr/>
+           <div class="small-print">
+            <div class="container">
+                <p><a href="#">Contact</a></p>
+                <p>Copyright &copy; 2016 by joinHearthstone </p>
+            </div>
+        </div>
+    </footer>
+    </body>
+</html>

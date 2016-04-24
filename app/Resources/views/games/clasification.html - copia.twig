@@ -1,0 +1,29 @@
+{% extends "parent.html.twig" %}
+
+{% block title %}Clasificacion{% endblock %}
+
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Clasificacion</title>
+    </head>
+    <body>
+        <h1>Clasificacion</h1>
+        <ul id="navigation">
+            {% for division in divisions %}
+                <h2>{{ division.name }}</h2>
+                {% for group in division.groups %}
+                    <h3>{{ group.name }} </h3>
+                    {% for player in group.players %}
+                        <p>
+                            {{ player.name }} / {{ player.wins }} / {{ player. loses }}
+                        </p>
+                    {% endfor %}
+                {% endfor %}  
+            {% endfor %}
+        </ul>
+    </body>
+</html>

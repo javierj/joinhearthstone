@@ -1,0 +1,40 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+mainpage:
+    path:  /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    static/index.html.twig
+rules:
+    path:  /rules
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    static/rules.html.twig
+contact:
+    path:  /contact
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    static/contact.html.twig
+faqs:
+    path:  /faqs
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    static/faqs.html.twig
+player:
+    path:  /player/new
+    defaults: { _controller: AppBundle:NewPlayer:new }
+viewmatches:
+    path:  /player/matches
+    defaults: { _controller: AppBundle:MatchesList:view }
+seasonoverview:
+    path:  /player/seasonoverview
+    defaults: { _controller: AppBundle:SeasonOverview:view }
+submitgame:
+    path:  /xyzzy/management_submitgame
+    defaults: { _controller: AppBundle:SubmitGame:submitgame }
+creategroups:
+    path:  /xyzzy/management_creategroups
+    defaults: { _controller: AppBundle:CreateInitialGroups:creategroups }
+
+    

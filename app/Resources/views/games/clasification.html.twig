@@ -1,0 +1,23 @@
+{% extends "parent.html.twig" %}
+
+{% block title %}Clasificacion{% endblock %}
+
+{% block body %}
+        <h1>Clasificacion</h1>
+        <ul id="navigation">
+            {% for division in divisions %}
+                <h2>Division: {{ division.name }}</h2>
+                {% for group in division.groups %}
+                    <h3>Grupo: {{ group.name }} </h3>
+                    <table>
+                    <tr> <td> Player </td> <td> Wins </td> <td> Loses </td> <td> Promotion </td> </tr>
+                    {% for player in group.players %}
+                        <tr>
+                            <td>{{ player.name }} </td><td> {{ player.wins }} </td><td> {{ player. loses }} </td><td> {{ player.promotion }} </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                {% endfor %}  
+            {% endfor %}
+        </ul>
+{% endblock %}
