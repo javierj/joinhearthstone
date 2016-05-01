@@ -17,7 +17,12 @@ class Groups
 
     static $forgue_division = "d";
 
-    static $players_per_group = 8;
+    static $players_per_group = 2;
+
+    /* Date for te first match os a seasson. Change this on each season */
+    static $initial_date="01/01/2016";
+    /* Days among matches. If you wanna more thannoe match per week, add more values */
+    static $increment =  [7,];
 
 	/**
 	Change this method to open/closes inscription to a new season

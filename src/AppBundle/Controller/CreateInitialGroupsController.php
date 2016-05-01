@@ -8,10 +8,9 @@ between seasons.
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\GameResultForm;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Controller\logic\Groups;
@@ -34,7 +33,7 @@ class CreateInitialGroupsController  extends Controller {
         $enought_players = count($players) >= $players_per_group;
         $player_index = 0;
         $total_players = count($players);
-         $unasigned_players = count($players);
+        $unasigned_players = count($players);
 
         while($enought_players) {
 
@@ -82,7 +81,7 @@ class CreateInitialGroupsController  extends Controller {
      */
     public function creategroupsAction(Request $request)
     {
-        $facade = new PlayersFacade($this->getDoctrine());
+        $facade = new PlayersFacade($this->getDoctrine()->getManager());
 
         // Cambiar esto para otras divisione so para asignar por skill
         $division = 1;

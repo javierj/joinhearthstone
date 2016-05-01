@@ -6,14 +6,15 @@ Use this controller to create matches after create the groups with the players.
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\GameResultForm;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Controller\logic\Groups;
 use AppBundle\Controller\bbdd\PlayersFacade;
+
+use AppBundle\Entity\Game;
 
 
 /**
@@ -37,8 +38,8 @@ class CreateMatchesController  extends Controller {
                 } else {
                     $game->setDateToPlay('Unset');
                 }
-                $game->setPlayerA($player_a->getId());
-                $game->setPlayerB($player_b->getId());
+                $game->setPlayerA($player_a);
+                $game->setPlayerB($player_b);
                 $games[$games_index] = $game;
                 $games_index++;
             }
@@ -69,40 +70,47 @@ class CreateMatchesController  extends Controller {
 
 
 
-    public function creategamesAction(Request $request)
+    public function creatematchesAction(Request $request)
     {
-        $facade = new PlayersFacade($this->getDoctrine());
+        $em = $this->getDoctrine()->getManager();
+        $facade = new PlayersFacade($em);
 
-        // Cambiar esto para otras divisione so para asignar por skill
-        $division = 1;
-
-        // Obtener jugadores
-        
+        // Cambiar esto para otras divisione o para asignar por skill
+        $division = 1; /*$facade->divisionsName();*/
 
         // Obtener fechas
-        
-        $initial_date="01/01/2016";
-        $increment =  [7,];
-        // Generar calendario
+        $initial_date=Groups::$initial_date;
+        $increment =  Groups::$increment;
 
+        // Obtener jugadores
+        $groups = $facade->groupsName($division);
+        foreach ($groups as $g) {
+            $players = $facade->playersByDivisionAndGroup($division, $g);
+            $dates = $this->createDates(count($players));
+            $dateSet = new ArrayOfSets();
+            $dateSet->addArrayKeys($dates);
 
-        $this->getDoctrine()->getManager()->flush();
+            $matches = $this->createSchedule($players, $dateSet);
+        }
 
-        $resp = "<html><body> <p> Players:".count($players)
-            ."</p> <p>Playesr_x_group:".Groups::$players_per_group
-            ."</p> <p>Groups created:".$this->groups_created
-            ."</p> <p>Unasigned players:".$unasigned
+        foreach($matches as $game) {
+            $em->persist($game);
+        }
+        $em->flush();
+
+        $resp = "<html><body> <p> Initial date:".$initial_date
+            ."</p> <p>Dates:".count($dates)
+            ."</p> <p>Players in last group:".count($players)
+            ."</p> <p>Matches created:".count($matches)
             ."</p><br/></body></html>";
 
         return new Response($resp);
 
     }
-
-   
 }
 
 
-   class ArrayOfSets {
+class ArrayOfSets {
     
     private $keys;
     private $values;
@@ -112,6 +120,7 @@ class CreateMatchesController  extends Controller {
         $this->values = array();
     }
 
+    /* A borrar */
     public function addArrayKeys($keys) {
         for ($i = 0; $i < count($keys); $i++) {
             $this->sets[$i] = $keys[$i];

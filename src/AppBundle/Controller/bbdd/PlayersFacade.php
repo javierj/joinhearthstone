@@ -37,8 +37,8 @@ class PlayersFacade
     function groupsName($division) {
          $query = $this->em->createQuery('SELECT DISTINCT u.groupname 
                                 FROM AppBundle\Entity\Player u
-                                WHERE u.division = :division'
-                                )->setParameter('division', $division);
+                                WHERE u.division = :divisionparam'
+                                )->setParameter(':divisionparam', $division);
          $groups = $query->getResult();
         return $groups;
     }
@@ -47,8 +47,8 @@ class PlayersFacade
     Sorted by wins
     */
     function playersByDivisionAndGroup($division, $group) {
-    	 $where = array('division' => $division, 'groupname' => $group);
-                $users = $this->em->getRepository('AppBundle\Entity\Player')->findBy($where, array('wins' => 'DESC'));
+    	$where = array('division' => $division, 'groupname' => $group);
+        $users = $this->em->getRepository('AppBundle\Entity\Player')->findBy($where, array('wins' => 'DESC'));
         return $users;
     }
 

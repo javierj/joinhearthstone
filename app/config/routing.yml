@@ -36,5 +36,8 @@ submitgame:
 creategroups:
     path:  /xyzzy/management_creategroups
     defaults: { _controller: AppBundle:CreateInitialGroups:creategroups }
+creatematches:
+    path:  /xyzzy/management_creatematches
+    defaults: { _controller: AppBundle:CreateMatches:creatematches }
 
     

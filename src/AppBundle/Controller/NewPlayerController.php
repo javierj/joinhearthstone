@@ -32,7 +32,6 @@ use AppBundle\Controller\logic\Groups;
  */
 class NewPlayerController extends Controller {
      /**
-     
      */
 
      function createPlayer() {
@@ -72,9 +71,9 @@ class NewPlayerController extends Controller {
 
     public function store($player) {
         $player->encryptPasswd();
-        $em = $this->getDoctrine()->getManager();
-            $em->persist($player);
-            $em->flush();
+        
+        $em->persist($player);
+        $em->flush();
     }
 
     /**

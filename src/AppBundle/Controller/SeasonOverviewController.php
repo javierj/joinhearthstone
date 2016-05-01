@@ -34,15 +34,25 @@ class SeasonOverviewController extends Controller {
         $plain_divisions = array();
        
         foreach ($divisions as $d) {
-            $groups = $facade->allGroups();
-            //$groups = $facade->groupsName($d); <-- Este es el que hay que usar, pero no me funciona
+            $groups = $facade->groupsName($d['division']); 
+
+            //return new Response('<html><body>Done!'.count($groups).'<br/></body></html> '); 
+            
+            /*return new Response('<html><body>Groups:'
+                .$groups[0]['groupname'].' / '
+                .$groups[1]['groupname']
+                .'<br/></body></html> ');*/
+               
 
             $plain_groups = array();
             $i_groups = 0;
             foreach ($groups as $g) {
                 $users = $facade->playersByDivisionAndGroup($d['division'], $g['groupname']);
-
-//return new Response('<html><body>Done!'.count($users).'<br/></body></html> '); 
+                /*
+                return new Response('<html><body> Division:'.$d['division']
+                    .'Gtoup:'.$g['groupname']
+                    .'Users:'.count($users).'<br/></body></html> '); 
+                    */
                 $players_info = array();
                 $i_players = 0;
                 foreach($users as $u) {
@@ -50,7 +60,6 @@ class SeasonOverviewController extends Controller {
                     $i_players++;
                 }
 
-                //$players_info[0]['promotion'] = "Asciende";
 
                 // Cambiamos las propomociones
                 $top = min(Groups::promoNumber($d, $g), count($players_info));
@@ -64,7 +73,7 @@ class SeasonOverviewController extends Controller {
                 }
 
                 $plain_groups[$i_groups] = array('name' => $g['groupname'], 'players' =>$players_info);
-                $i_players++;    
+                $i_groups++;    
             }
             $plain_divisions[$i_divisions]= array('name'=>$d['division'], 'groups'=>$plain_groups);
             $i_divisions++;

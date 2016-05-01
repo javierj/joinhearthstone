@@ -53,7 +53,7 @@ class Player {
      */
     protected $email;
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=200)
      * @Assert\NotBlank()
      */
     protected $password;

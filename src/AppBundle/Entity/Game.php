@@ -45,10 +45,6 @@ class Game {
      */
     protected $player_b;
      /**
-      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
-     */
-     /**
      * @ORM\Column(type="integer")
      */
     protected $wins;
@@ -64,7 +60,6 @@ class Game {
     
 
     function __construct() {
-        $this->setGroupId('No');
        $this->setWins(0);
        $this->setLoses(0);
        $this->played = false;
@@ -89,7 +84,7 @@ class Game {
     }
 
     function getGroupId() {
-        return $this->groupId;
+        return $this->group_id;
     }
 
 
@@ -111,7 +106,7 @@ class Game {
     }
 
     function setGroupId($param) {
-        $this->groupId = $param;
+        $this->group_id = $param;
     }
 
     function setWins($wins) {
@@ -122,21 +117,18 @@ class Game {
         $this->loses = $loses;
     }
 
-    function setCreationDate($date) {
-        $this->creation_date = $date;
-    }
-    
-    function getCreationDate() {
-        return $this->creation_date;
+
+    function setDateToPlay($date) {
+        $this->date_to_play = $date;
     }
 
-    /* Id of the player */
+    /* The whole object of the player */
     function setPlayerA($player_a) {
         $this->player_a = $player_a;
     }
 
-    function setPlayerB() {
-        return $this->player_b;
+    function setPlayerB($player_b) {
+        $this->player_b = $player_b;
     }
 
 }
